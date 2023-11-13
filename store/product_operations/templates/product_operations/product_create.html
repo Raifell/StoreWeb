@@ -1,0 +1,22 @@
+{% extends 'show_info/layout.html' %}
+
+{% block content %}
+    {% if not valid %}
+        <h1 style="color: red">Wrong walue</h1>
+    {% endif %}
+    {% if success %}
+        <h1 style="color: green">Success</h1>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="Name">
+        <input type="number" name="price" placeholder="Price">
+        <input type="number" name="quantity" placeholder="Quantity">
+        <select name="category">
+            {% for category in category_list %}
+                <option value="{{ category.pk }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}
