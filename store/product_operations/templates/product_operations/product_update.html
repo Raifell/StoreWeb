@@ -1,0 +1,21 @@
+{% extends 'show_info/layout.html' %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" value="{{ product.name }}">
+        <input type="number" name="price" value="{{ product.price }}">
+        <input type="number" name="quantity" value="{{ product.quantity }}">
+        <select name="category">
+            {% for category in category_list %}
+                <option
+                        {% if category == product.category %}
+                            selected
+                        {% endif %}
+                        value="{{ category.pk }}">{{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}

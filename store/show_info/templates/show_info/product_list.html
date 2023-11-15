@@ -1,10 +1,21 @@
 {% extends 'show_info/layout.html' %}
 
 {% block content %}
+    <div class="create">
+        <a href="{% url 'product_create_page' %}">Create</a>
+    </div>
+    <div class="cat_link">
+        {% for cat in categorys %}
+            <a href="{% url 'product_list_page' %}?name={{ cat.name }}">{{ cat.name }}</a>
+        {% endfor %}
+        <a href="{% url 'product_list_page' %}">Show all</a>
+    </div>
     {% for product in products %}
         <div class="card_info">
             <div>
-                <h1>{{ product.name }} - <a href="{% url 'product_detail_page' product.slug %}">Detail</a></h1>
+                <h1>{{ product.name }} - <a href="{% url 'product_detail_page' product.slug %}">Detail</a>
+                - <a href="{% url 'product_update_page' product.slug %}">Update</a>
+                - <a href="{% url 'product_delete_page' product.slug %}">Delete</a></h1>
             </div>
         </div>
     {% endfor %}
